@@ -122,23 +122,6 @@ Example Output
 --------------
 
 
-`Starting push_swap tests...
-
-Running simple tests...
-Testing sequence: [2147483647]
-OK (No instructions expected)
-Testing sequence: [-2147483648, 2147483647]
-OK (No instructions expected)
-
-Running 3 elements test...
-Sequence: [2147483647, 0, -2147483648]
-OK with 2 or 3 instructions
-
-Running 5 random elements test...
-Sequence: [-345, 123, 0, 789, -100]
-OK with 12 or fewer instructions
-
-Running 100 random elements test...
-Test 1: OK with score 5 (Instructions: 689)`
+![](screenshot/Screenshot.png)
 
 * * * * *
