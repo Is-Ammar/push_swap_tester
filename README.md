@@ -97,6 +97,7 @@ Program Workflow
     -   Scores the efficiency of the sorting solution.
 6.  **Output**:
     -   Displays detailed results for each test.
+    -   Saves failling cases in a file .
 
 * * * * *
 
