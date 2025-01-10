@@ -1,7 +1,6 @@
 import subprocess
 import random
 import sys
-import os
 
 PUSH_SWAP_EXECUTABLE = "./push_swap"
 
@@ -24,11 +23,13 @@ def is_sorted(sequence):
     return sequence == sorted(sequence)
 
 def run_push_swap(input_sequence):
+
     is_valid, error_message = validate_input(input_sequence)
     if not is_valid:
         return error_message, ""
 
     try:
+        
         arg_str = " ".join(map(str, input_sequence))
 
         push_swap_result = subprocess.run([PUSH_SWAP_EXECUTABLE] + list(map(str, input_sequence)),
@@ -130,15 +131,6 @@ def test_5_random_elements():
     else:
         print(f"\033[91mKO\033[0m (Incorrect output)")
 
-def save_failing_case(numbers, moves, test_number):
-    if not os.path.exists('failing_cases'):
-        os.makedirs('failing_cases')
-    filename = f'failing_cases/fail_case_{test_number}_{moves}_moves.txt'
-    with open(filename, 'w') as f:
-        f.write(f"Number of moves: {moves}\n")
-        f.write(f"Numbers: {' '.join(map(str, numbers))}\n")
-    return filename
-
 def test_100_random_elements():
     print("\nRunning 100 random elements test...")
     for i in range(500): 
@@ -168,9 +160,6 @@ def test_100_random_elements():
 
 def test_500_random_elements():
     print("\nRunning 500 random elements test...")
-    failing_cases = 0
-    max_moves_seen = 0
-
     for i in range(500): 
         seq = [random.randint(INT_MIN, INT_MAX) for _ in range(500)]
         checker_output, push_swap_output = run_push_swap(seq)
@@ -192,20 +181,9 @@ def test_500_random_elements():
             sys.stdout.write(f"\rTest {i + 1}: \033[92mOK\033[0m with score {score} (Instructions: {num_instructions})   ")
         else:
             sys.stdout.write(f"\rTest {i + 1}: \033[91mKO\033[0m (Incorrect output)   ")
-
-        if num_instructions > 5500:
-            failing_cases += 1
-            filename = save_failing_case(seq, num_instructions, i + 1)
-            print(f"\nTest {i + 1} exceeded 5500 moves ({num_instructions} moves)")
-            print(f"Failing case saved to: {filename}")
-
-        max_moves_seen = max(max_moves_seen, num_instructions)
         sys.stdout.flush()
 
-    print("\n\nTesting completed!")
-    print(f"Total tests run: 500")
-    print(f"Number of cases exceeding 5500 moves: {failing_cases}")
-    print(f"Maximum moves seen: {max_moves_seen}")
+    print() 
 
 def main():
     print("Starting push_swap tests...\n")
